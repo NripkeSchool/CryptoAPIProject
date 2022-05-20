@@ -9,19 +9,18 @@ function postRequest(request, loadcb) {
 function testing()
 {
     const d = new Date();
-    let month=d.getMonth()+1;
-    let day=d.getDate();
-    if (month < 10)
-    {
-        month = "0"+month;
-    }
-    if (day < 10)
-    {
-        day = "0"+day;
-    }
+    let month= "05";
+    let day= "18";
+    
     let request = 'getData='+d.getFullYear()+"-"+month+"-"+day;
     console.log(request);
-    function callback() {document.getElementById("info").innerHTML = this.responseText;}
+    function callback() 
+    {
+        console.log(this.responseText);
+        let info = JSON.parse(this.responseText);
+        
+        document.getElementById("info").innerHTML = info["results"][0]["t"];
+    }
 
     postRequest(request, callback);
 }
