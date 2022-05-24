@@ -19,7 +19,18 @@ function testing()
         console.log(this.responseText);
         let info = JSON.parse(this.responseText);
         
-        document.getElementById("info").innerHTML = info["results"][0]["t"];
+        let high = info["results"][0]["h"];
+        let low = info["results"][0]["l"];
+        for (let i = 1; i<1439; i++)
+        {
+            let newH = info["results"][i]["h"];
+            let newL = info["results"][i]["l"];
+            if (high < newH) {high = newH;}
+            if (low > newL) {low = newL;}
+        }
+        //info["results"][100]["h"]
+        document.getElementById("highInfo").innerHTML = high;
+        document.getElementById("lowInfo").innerHTML = low;
     }
 
     postRequest(request, callback);
